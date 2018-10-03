@@ -38,6 +38,7 @@ void writePacCol(uint32_t packedColor);
 uint32_t wheel(unsigned char WheelPos);
 
 void setup() {
+    CLKDIVbits.RCDIV = 0;
     AD1PCFG = 0x9fff;
     TRISA = 0b1111111111111110;
     LATA = 0x0000;
@@ -46,19 +47,42 @@ void setup() {
 int main(void) {
     setup();
     unsigned char num;
+    
     while(1) {
 	/*
-	for(num = 0; num <= 255; num++) {
-	     writePacCol(wheel(num));
+	//writeColor(0xff, 0xff, 0xff);
+	for(num = 255; num > 0; num--) {
+	     drawFrame(num);
 	     delay(PERIOD);
 	}
-	*/
+	for(num = 0; num < 255; num++) {
+	     drawFrame(num);
+	     delay(PERIOD);
+	}
+    }
+    */
+    
+	for(num = 0; num < 255; num++) {
+	    writePacCol(wheel(num));
+	    delay(PERIOD);
+	}
     }
     return 0;
 }
 
 void writeColor(int r, int g, int b) {
-    //LOL
+    write_0();
+    hoc_delay_1ms();
+    int i;
+    for(i = 7; i >= 0; i--) {
+	r & (1 << i) ? write_1() : write_0();
+    }
+    for(i = 7; i >= 0; i--) {
+	g & (1 << i) ? write_1() : write_0();
+    }
+    for(i = 7; i >= 0; i--) {
+	b & (1 << i) ? write_1() : write_0();
+    }
 }
 
 void drawFrame(unsigned char frame) {
@@ -97,10 +121,11 @@ uint32_t wheel(unsigned char wheelPos) {
     wheelPos = 255 - wheelPos;
     if(wheelPos < 85) {
 	return packColor(255 - wheelPos * 3, 0, wheelPos * 3);
-    }
-    if(wheelPos < 170) {
+    } else if(wheelPos < 170) {
+	wheelPos -= 85;
 	return packColor(0, wheelPos * 3, 255 - wheelPos * 3);
+    } else {
+	wheelPos -= 170;
+        return packColor(wheelPos * 3, 255 - wheelPos * 3, 0);
     }
-    wheelPos -= 170;
-    return packColor(wheelPos * 3, 255 - wheelPos * 3, 0);
 }
