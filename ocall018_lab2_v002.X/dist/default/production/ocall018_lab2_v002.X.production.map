@@ -174,9 +174,9 @@ __CONFIG1         0x00abfe          0x2
 .comment
  *(.comment)
 
-.debug_info       0x000000         0x9b
+.debug_info       0x000000         0x94
  *(.debug_info)
- .debug_info      0x000000         0x9b build/default/production/ocall018_lab2_core_v003.o
+ .debug_info      0x000000         0x94 build/default/production/ocall018_lab2_core_v003.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000         0x14
