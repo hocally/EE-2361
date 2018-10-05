@@ -34,15 +34,30 @@ void setup(void) {
 
 int main(void) {
     setup();
-    int i;
-    long int j;
+    //int i;
+    //long int j;
+    
+    unsigned short key = 0;
+    unsigned short left = 0;
+    unsigned short right = 0;
     while(1) {
+	key = readKeyPadRAW();
+	if(key > 1) {
+	    right = left;
+	    right = key;
+	}
+	showChar7seg(left, msb);
+	showChar7seg(right, lsb);
+	
+	
+	/*
 	for(i = 0x0; i < 0x10; i++) {
 	    showChar7seg(i, msb);
 	    for(j = 0; j < 400000; j++) {
 		asm("nop");
 	    }
 	}
+	*/	
     }
     return 0;
 }
