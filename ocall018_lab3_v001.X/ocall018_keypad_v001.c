@@ -25,7 +25,7 @@ void initKeyPad(void) {
 
 unsigned int readKeyPadRAW(void) {
   static unsigned short int pressed = 0;
-  static unsigned int key = 0;
+  static unsigned int key = 2;
   int i;
   int num;
   for (i = 0; i < 4; i++) {
@@ -35,8 +35,17 @@ unsigned int readKeyPadRAW(void) {
     asm("nop");
     asm("nop");
     asm("nop");
-
-    num = (!_RB15 << 3) | (!_RB14 << 2) | (!_RB13 << 1) | !_RB12;
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    asm("nop");
+    
+    num = (_RB15 << 3) | (_RB14 << 2) | (_RB13 << 1) | _RB12;
 
     if (num > 0) {
       if (!pressed) {
