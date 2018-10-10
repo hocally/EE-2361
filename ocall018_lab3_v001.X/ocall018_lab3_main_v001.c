@@ -37,14 +37,16 @@ int main(void) {
     //int i;
     //long int j;
     
-    unsigned short key = 0;
-    unsigned short left = 0;
-    unsigned short right = 0;
+    unsigned short key;
+    unsigned short lastKey = -1;
+    unsigned short left = 16;
+    unsigned short right = 16;
     while(1) {
 	key = readKeyPadRAW();
-	if(key > 1) {
+	if(key != lastKey) {
 	    right = left;
 	    right = key;
+	    lastKey = key;
 	}
 	showChar7seg(left, msb);
 	showChar7seg(right, lsb);
