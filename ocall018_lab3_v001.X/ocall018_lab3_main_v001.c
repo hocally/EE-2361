@@ -36,30 +36,38 @@ int main(void) {
     setup();
     //int i;
     //long int j;
-    
+
     unsigned short key;
     unsigned short lastKey = -1;
     unsigned short left = 16;
     unsigned short right = 16;
-    while(1) {
-	key = readKeyPadRAW();
-	if(key != lastKey) {
-	    right = left;
-	    right = key;
-	    lastKey = key;
-	}
-	showChar7seg(left, msb);
-	showChar7seg(right, lsb);
-	
-	
-	/*
-	for(i = 0x0; i < 0x10; i++) {
-	    showChar7seg(i, msb);
-	    for(j = 0; j < 400000; j++) {
-		asm("nop");
-	    }
-	}
-	*/	
+    while (1) {
+        key = readKeyPadRAW();
+        if (key == -1) {
+            lastKey = key;
+        } else if (lastKey == -1) {
+            left = right;
+            right = key;
+            lastKey = key;
+        }
+        showChar7seg(left, msb);
+        int a;
+        for (a = 0; a < 159; a++) {
+            asm("nop");
+        }
+        showChar7seg(right, lsb);
+        for (a = 0; a < 159; a++) {
+            asm("nop");
+        }
+
+        /*
+        for(i = 0x0; i < 0x10; i++) {
+            showChar7seg(i, msb);
+            for(j = 0; j < 400000; j++) {
+            asm("nop");
+            }
+        }
+         */
     }
     return 0;
 }

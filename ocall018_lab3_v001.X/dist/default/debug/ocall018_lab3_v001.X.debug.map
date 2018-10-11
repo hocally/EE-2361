@@ -4,9 +4,14 @@ Tool Name:
   c:\program files (x86)\microchip\xc16\v1.35\bin\bin\..\bin/elf-ld.exe
 
 Command:
+  -TC:\\Users\\Kevin\\AppData\\Local\\Temp\\tmp00004190.00 \
+  -TC:\\Users\\Kevin\\AppData\\Local\\Temp\\tmp00004190.01 \
+  -TC:\\Users\\Kevin\\AppData\\Local\\Temp\\tmp00004190.02 \
+  -TC:\\Users\\Kevin\\AppData\\Local\\Temp\\tmp00004190.03 \
+  -TC:\\Users\\Kevin\\AppData\\Local\\Temp\\tmp00004190.04 \
   -p24FJ64GA002 \
   -o \
-  dist/default/production/ocall018_lab3_v001.X.production.elf \
+  dist/default/debug/ocall018_lab3_v001.X.debug.elf \
   -Lc:/program files (x86)/microchip/xc16/v1.35/bin/bin/.. \
   -Lc:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib \
   -Lc:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../support/PIC24E/gld \
@@ -16,11 +21,14 @@ Command:
   -Lc:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../support/dsPIC33C/gld \
   -Lc:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../support/dsPIC33E/gld \
   -Lc:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../support/dsPIC33F/gld \
-  build/default/production/ocall018_lab3_main_v001.o \
-  build/default/production/ocall018_display_v001.o \
-  build/default/production/ocall018_keypad_v001.o \
+  build/default/debug/ocall018_lab3_main_v001.o \
+  build/default/debug/ocall018_display_v001.o \
+  build/default/debug/ocall018_keypad_v001.o \
   --defsym=__MPLAB_BUILD=1 \
-  -Tp24FJ64GA002.gld.00 \
+  --defsym=__MPLAB_DEBUG=1 \
+  --defsym=__DEBUG=1 \
+  --defsym=__MPLAB_DEBUGGER_PK3=1 \
+  -Tp24FJ64GA002.gld.05 \
   --stack=16 \
   --check-sections \
   --data-init \
@@ -32,10 +40,10 @@ Command:
   --stackguard=16 \
   --no-force-link \
   --smart-io \
-  -Map=dist/default/production/ocall018_lab3_v001.X.production.map \
+  -Map=dist/default/debug/ocall018_lab3_v001.X.debug.map \
   --report-mem \
   --memorysummary \
-  dist/default/production/memoryfile.xml \
+  dist/default/debug/memoryfile.xml \
   -start-group \
   --library=lega-pic30-elf \
   --library=m-elf \
@@ -72,10 +80,15 @@ section                    address   length (PC units)   length (bytes) (dec)
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.nbss                        0x800                   0             0x2  (2)
-.ndata                       0x802                   0             0x2  (2)
+reserve_data_0x800           0x800                0x20            0x20  (32)
+reserve_data_0x820           0x820                 0x2             0x2  (2)
+reserve_data_0x822           0x822                 0x2             0x2  (2)
+reserve_data_0x824           0x824                 0x2             0x2  (2)
+reserve_data_0x826           0x826                0x2a            0x2a  (42)
+.nbss                        0x850                   0             0x2  (2)
+.ndata                       0x852                   0             0x2  (2)
 
-                 Total "data" memory used (bytes):            0x4  (4) <1%
+                 Total "data" memory used (bytes):           0x54  (84) 1%
 
 
 Dynamic Memory Usage
@@ -83,9 +96,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x804                              0x1ffc  (8188)
+stack                        0x854                              0x1fac  (8108)
 
-                 Maximum dynamic memory (bytes):         0x1ffc  (8188)
+                 Maximum dynamic memory (bytes):         0x1fac  (8108)
 
 
 External Symbols in Program Memory (by address):
@@ -133,10 +146,38 @@ CONFIG1          0x00abfe           0x000002
 
 Linker script and memory map
 
-LOAD build/default/production/ocall018_lab3_main_v001.o
-LOAD build/default/production/ocall018_display_v001.o
-LOAD build/default/production/ocall018_keypad_v001.o
+
+reserve_data_0x800
+                    0x0800         0x20
+                    0x0820                  . = 0x20
+ *fill*             0x0800         0x2000
+
+reserve_data_0x820
+                    0x0820          0x2
+                    0x0822                  . = 0x2
+ *fill*             0x0820          0x200
+
+reserve_data_0x822
+                    0x0822          0x2
+                    0x0824                  . = 0x2
+ *fill*             0x0822          0x200
+
+reserve_data_0x824
+                    0x0824          0x2
+                    0x0826                  . = 0x2
+ *fill*             0x0824          0x200
+
+reserve_data_0x826
+                    0x0826         0x2a
+                    0x0850                  . = 0x2a
+ *fill*             0x0826         0x2a00
+LOAD build/default/debug/ocall018_lab3_main_v001.o
+LOAD build/default/debug/ocall018_display_v001.o
+LOAD build/default/debug/ocall018_keypad_v001.o
                     0x0001                  __MPLAB_BUILD = 0x1
+                    0x0001                  __MPLAB_DEBUG = 0x1
+                    0x0001                  __DEBUG = 0x1
+                    0x0001                  __MPLAB_DEBUGGER_PK3 = 0x1
 LOAD pPIC24Fxxx
 LOAD c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libfx-elf.a
                     0xabfc                  __CONFIG2 = 0xabfc
@@ -192,34 +233,34 @@ __CONFIG1
 
 .debug_info       0x000000        0xad8
  *(.debug_info)
- .debug_info      0x000000        0x342 build/default/production/ocall018_lab3_main_v001.o
- .debug_info      0x000342        0x263 build/default/production/ocall018_display_v001.o
- .debug_info      0x0005a5        0x533 build/default/production/ocall018_keypad_v001.o
+ .debug_info      0x000000        0x342 build/default/debug/ocall018_lab3_main_v001.o
+ .debug_info      0x000342        0x263 build/default/debug/ocall018_display_v001.o
+ .debug_info      0x0005a5        0x533 build/default/debug/ocall018_keypad_v001.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000        0x2d0
  *(.debug_abbrev)
- .debug_abbrev    0x000000         0xfd build/default/production/ocall018_lab3_main_v001.o
- .debug_abbrev    0x0000fd         0xd2 build/default/production/ocall018_display_v001.o
- .debug_abbrev    0x0001cf        0x101 build/default/production/ocall018_keypad_v001.o
+ .debug_abbrev    0x000000         0xfd build/default/debug/ocall018_lab3_main_v001.o
+ .debug_abbrev    0x0000fd         0xd2 build/default/debug/ocall018_display_v001.o
+ .debug_abbrev    0x0001cf        0x101 build/default/debug/ocall018_keypad_v001.o
 
 .debug_line       0x000000        0x3a7
  *(.debug_line)
- .debug_line      0x000000        0x12f build/default/production/ocall018_lab3_main_v001.o
- .debug_line      0x00012f        0x11b build/default/production/ocall018_display_v001.o
- .debug_line      0x00024a        0x15d build/default/production/ocall018_keypad_v001.o
+ .debug_line      0x000000        0x12f build/default/debug/ocall018_lab3_main_v001.o
+ .debug_line      0x00012f        0x11b build/default/debug/ocall018_display_v001.o
+ .debug_line      0x00024a        0x15d build/default/debug/ocall018_keypad_v001.o
 
 .debug_frame      0x000000         0xe4
  *(.debug_frame)
- .debug_frame     0x000000         0x4c build/default/production/ocall018_lab3_main_v001.o
- .debug_frame     0x00004c         0x4c build/default/production/ocall018_display_v001.o
- .debug_frame     0x000098         0x4c build/default/production/ocall018_keypad_v001.o
+ .debug_frame     0x000000         0x4c build/default/debug/ocall018_lab3_main_v001.o
+ .debug_frame     0x00004c         0x4c build/default/debug/ocall018_display_v001.o
+ .debug_frame     0x000098         0x4c build/default/debug/ocall018_keypad_v001.o
 
 .debug_str        0x000000         0x28
  *(.debug_str)
- .debug_str       0x000000          0xb build/default/production/ocall018_lab3_main_v001.o
- .debug_str       0x00000b          0x9 build/default/production/ocall018_display_v001.o
- .debug_str       0x000014         0x14 build/default/production/ocall018_keypad_v001.o
+ .debug_str       0x000000          0xb build/default/debug/ocall018_lab3_main_v001.o
+ .debug_str       0x00000b          0x9 build/default/debug/ocall018_display_v001.o
+ .debug_str       0x000014         0x14 build/default/debug/ocall018_keypad_v001.o
 
 .debug_loc
  *(.debug_loc)
@@ -231,11 +272,11 @@ __CONFIG1
                   0x000000         0x95
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0x25 build/default/production/ocall018_lab3_main_v001.o
+                  0x000000         0x25 build/default/debug/ocall018_lab3_main_v001.o
  .debug_pubnames
-                  0x000025         0x3d build/default/production/ocall018_display_v001.o
+                  0x000025         0x3d build/default/debug/ocall018_display_v001.o
  .debug_pubnames
-                  0x000062         0x33 build/default/production/ocall018_keypad_v001.o
+                  0x000062         0x33 build/default/debug/ocall018_keypad_v001.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -243,11 +284,11 @@ __CONFIG1
 .debug_aranges    0x000000         0x48
  *(.debug_aranges)
  .debug_aranges
-                  0x000000         0x18 build/default/production/ocall018_lab3_main_v001.o
+                  0x000000         0x18 build/default/debug/ocall018_lab3_main_v001.o
  .debug_aranges
-                  0x000018         0x18 build/default/production/ocall018_display_v001.o
+                  0x000018         0x18 build/default/debug/ocall018_display_v001.o
  .debug_aranges
-                  0x000030         0x18 build/default/production/ocall018_keypad_v001.o
+                  0x000030         0x18 build/default/debug/ocall018_keypad_v001.o
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -829,57 +870,57 @@ LOAD c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30
 LOAD c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a
 LOAD c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-c-elf.a
 END GROUP
-OUTPUT(dist/default/production/ocall018_lab3_v001.X.production.elf elf32-pic30)
+OUTPUT(dist/default/debug/ocall018_lab3_v001.X.debug.elf elf32-pic30)
 LOAD default_isr
 LOAD data_init
 
 .debug_pubtypes
                   0x000048         0xd0
  .debug_pubtypes
-                  0x000048         0x4a build/default/production/ocall018_lab3_main_v001.o
+                  0x000048         0x4a build/default/debug/ocall018_lab3_main_v001.o
  .debug_pubtypes
-                  0x000092         0x29 build/default/production/ocall018_display_v001.o
+                  0x000092         0x29 build/default/debug/ocall018_display_v001.o
  .debug_pubtypes
-                  0x0000bb         0x5d build/default/production/ocall018_keypad_v001.o
+                  0x0000bb         0x5d build/default/debug/ocall018_keypad_v001.o
 
 __c30_signature
                   0x000118         0x1e
  __c30_signature
-                  0x000118          0x6 build/default/production/ocall018_lab3_main_v001.o
+                  0x000118          0x6 build/default/debug/ocall018_lab3_main_v001.o
  __c30_signature
-                  0x00011e          0x6 build/default/production/ocall018_display_v001.o
+                  0x00011e          0x6 build/default/debug/ocall018_display_v001.o
  __c30_signature
-                  0x000124          0x6 build/default/production/ocall018_keypad_v001.o
+                  0x000124          0x6 build/default/debug/ocall018_keypad_v001.o
  __c30_signature
                   0x00012a          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
  __c30_signature
                   0x000130          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
 
-.nbss               0x0800          0x2
- .nbss              0x0800          0x2 build/default/production/ocall018_keypad_v001.o
+.nbss               0x0850          0x2
+ .nbss              0x0850          0x2 build/default/debug/ocall018_keypad_v001.o
 
-.ndata              0x0802          0x2
- .ndata             0x0802          0x2 build/default/production/ocall018_keypad_v001.o
+.ndata              0x0852          0x2
+ .ndata             0x0852          0x2 build/default/debug/ocall018_keypad_v001.o
 
 .config_JTAGEN    0x00abfe          0x2
  .config_JTAGEN
-                  0x00abfe          0x2 build/default/production/ocall018_lab3_main_v001.o
+                  0x00abfe          0x2 build/default/debug/ocall018_lab3_main_v001.o
 
 .config_IESO      0x00abfc          0x2
- .config_IESO     0x00abfc          0x2 build/default/production/ocall018_lab3_main_v001.o
+ .config_IESO     0x00abfc          0x2 build/default/debug/ocall018_lab3_main_v001.o
 
 .const              0x82ce         0x22 load address 0x0002ce  
- .const             0x82ce         0x22 build/default/production/ocall018_display_v001.o
+ .const             0x82ce         0x22 build/default/debug/ocall018_display_v001.o
                     0x82ce                  _patterns
 
 .text             0x0002f0        0x272
- .text            0x0002f0        0x1ac build/default/production/ocall018_keypad_v001.o
+ .text            0x0002f0        0x1ac build/default/debug/ocall018_keypad_v001.o
                   0x0002f0                  _initKeyPad
                   0x000318                  _readKeyPadRAW
- .text            0x00049c         0x82 build/default/production/ocall018_lab3_main_v001.o
+ .text            0x00049c         0x82 build/default/debug/ocall018_lab3_main_v001.o
                   0x00049c                  _setup
                   0x0004ae                  _main
- .text            0x00051e         0x44 build/default/production/ocall018_display_v001.o
+ .text            0x00051e         0x44 build/default/debug/ocall018_display_v001.o
                   0x00051e                  _init7seg
                   0x00053c                  _showChar7seg
 

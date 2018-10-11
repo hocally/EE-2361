@@ -16,6 +16,10 @@ void initKeyPad(void) {
   TRISB |= 0b1111000000000000; //only set RB2-RB11 output. Leave the rest as they were
   TRISA &= 0b1111111111110000;
   LATA &=  0b0000000000001111; //turn off all displays
+  CNPU1bits.CN11PUE = 1;
+  CNPU1bits.CN12PUE = 1;
+  CNPU1bits.CN13PUE = 1;
+  CNPU1bits.CN14PUE = 1;
 }
 
 /*
@@ -23,33 +27,25 @@ void initKeyPad(void) {
   RA0    RA1    RA2    RA3    RB15    RB14    RB13    RB12
 */
 
-unsigned int readKeyPadRAW(void) {
+unsigned int readKeyPadRAW(void) { 
   static unsigned short int pressed = 0;
-  static unsigned int key = 2;
+  static unsigned int key = 16;
   int i;
   int num;
   for (i = 0; i < 4; i++) {
-    LATA |= 0b1111; //Changed this around, I think we had the logic flipped
-    LATA -= 0b1000 >> i;
-
-    asm("nop");
-    asm("nop");
-    asm("nop");
-    asm("nop");
-    asm("nop");
-    asm("nop");
-    asm("nop");
-    asm("nop");
-    asm("nop");
-    asm("nop");
-    asm("nop");
-    asm("nop");
+    LATA &= 0b1111111111110000; //Changed this around, I think we had the logic flipped
+    LATA += 0b1000 >> i;
+    int a;
+    for(a=0;a<10;a++)
+    {
+        asm("nop");
+    }
     
-    num = (_RB15 << 3) | (_RB14 << 2) | (_RB13 << 1) | _RB12;
+    num = (!_RB15 << 3) | (!_RB14 << 2) | (!_RB13 << 1) | !_RB12;
 
     if (num > 0) {
       if (!pressed) {
-        if (i == 0) {
+        if (i == 1) {
           switch (num) {
             //1
             case 0b1000:
@@ -65,7 +61,7 @@ unsigned int readKeyPadRAW(void) {
               key = 1;
               break;
           }
-        } else if (i == 1) {
+        } else if (i == 2) {
           //2
           switch (num) {
             case 0b1000:
@@ -81,7 +77,7 @@ unsigned int readKeyPadRAW(void) {
               key = 2;
               break;
           }
-        } else if (i == 2) {
+        } else if (i == 3) {
           //3
           switch (num) {
             case 0b1000:
@@ -97,7 +93,7 @@ unsigned int readKeyPadRAW(void) {
               key = 3;
               break;
           }
-        } else if (i == 3) {
+        } else if (i == 0) {
           //A
           switch (num) {
             case 0b1000:
@@ -118,6 +114,7 @@ unsigned int readKeyPadRAW(void) {
       }
     } else {
       pressed = 0;
+      key = -1;
     }
   }
   return key;

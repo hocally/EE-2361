@@ -37,10 +37,11 @@ void init7seg(void) {
     AD1PCFG = 0x9fff; //all digital inputs and outputs
     TRISB &= 0b1111000000000011; //only set RB2-RB11 output. Leave the rest as they were
     LATB |=  0b0000111111111100; //turn all 7-seg LEDs off
-    LATB &=  0b1100111111111111; //turn off all displays
+    LATB &=  0b1111111111111111; //turn off all displays
 }
 
 void showChar7seg(char myChar, enum DIGIT myDigit) {
+    
     LATB &= CLEAR_ALL_DIG_AND_SEGS_BITS_MASK;
     LATB |= myDigit | patterns[myChar];    
 }
