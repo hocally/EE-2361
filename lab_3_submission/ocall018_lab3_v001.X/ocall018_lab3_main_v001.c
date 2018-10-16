@@ -1,15 +1,15 @@
 /*
- * File:   ocall018_lab4_main_v001.c
+ * File:   ocall018_lab3_main_v001.c
  * Author: h-o-cally
  *
- * Created on October 15, 2018, 3:39 PM
+ * Created on October 3, 2018, 4:49 PM
  */
 
 
 #include "xc.h"
 #include "stdint.h"
-#include "ocall018_servo.h"
-#include "ocall018_button.h"
+#include "ocall018_display_v001.h"
+#include "ocall018_keypad_v001.h"
 
 // CW1: FLASH CONFIGURATION WORD 1 (see PIC24 Family Reference Manual 24.1)
 #pragma config ICS = PGx1 // Comm Channel Select (Emulator EMUC1/EMUD1 pins are shared with PGC1/PGD1)
@@ -26,24 +26,48 @@
                                 // Fail-Safe Clock Monitor is enabled)
 #pragma config FNOSC = FRCPLL // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
 
-void setup() {
+void setup(void) {
     CLKDIVbits.RCDIV = 0;
-    AD1PCFG = 0x9fff; //all digital inputs and outputs
-    _CN22PUE = 1;
-    initServo();
+    init7seg();
+    initKeyPad();
 }
 
 int main(void) {
     setup();
-    int pos;
-    int j;
-    while(1) {
-	for(pos = 319; pos < 1239; pos++) {
-	    setServo(pos);
-	    for(j = 0; j < 1000; j++) {
-		asm("nop");
-	    }
-	}
+    //int i;
+    //long int j;
+
+    unsigned short key;
+    unsigned short lastKey = -1;
+    unsigned short left = 16;
+    unsigned short right = 16;
+    while (1) {
+        key = readKeyPadRAW();
+        if (key == -1) {
+            lastKey = key;
+        } else if (lastKey == -1) {
+            left = right;
+            right = key;
+            lastKey = key;
+        }
+        showChar7seg(left, msb);
+        int a;
+        for (a = 0; a < 159; a++) {
+            asm("nop");
+        }
+        showChar7seg(right, lsb);
+        for (a = 0; a < 159; a++) {
+            asm("nop");
+        }
+
+        /*
+        for(i = 0x0; i < 0x10; i++) {
+            showChar7seg(i, msb);
+            for(j = 0; j < 400000; j++) {
+            asm("nop");
+            }
+        }
+         */
     }
     return 0;
 }

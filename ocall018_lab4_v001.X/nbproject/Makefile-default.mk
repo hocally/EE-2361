@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=ocall018_lab4_main_v001.c ocall018_servo.c
+SOURCEFILES_QUOTED_IF_SPACED=ocall018_lab4_main_v001.c ocall018_servo.c ocall_018_button.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ocall018_lab4_main_v001.o ${OBJECTDIR}/ocall018_servo.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/ocall018_lab4_main_v001.o.d ${OBJECTDIR}/ocall018_servo.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ocall018_lab4_main_v001.o ${OBJECTDIR}/ocall018_servo.o ${OBJECTDIR}/ocall_018_button.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/ocall018_lab4_main_v001.o.d ${OBJECTDIR}/ocall018_servo.o.d ${OBJECTDIR}/ocall_018_button.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/ocall018_lab4_main_v001.o ${OBJECTDIR}/ocall018_servo.o
+OBJECTFILES=${OBJECTDIR}/ocall018_lab4_main_v001.o ${OBJECTDIR}/ocall018_servo.o ${OBJECTDIR}/ocall_018_button.o
 
 # Source Files
-SOURCEFILES=ocall018_lab4_main_v001.c ocall018_servo.c
+SOURCEFILES=ocall018_lab4_main_v001.c ocall018_servo.c ocall_018_button.c
 
 
 CFLAGS=
@@ -108,6 +108,13 @@ ${OBJECTDIR}/ocall018_servo.o: ocall018_servo.c  nbproject/Makefile-${CND_CONF}.
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ocall018_servo.c  -o ${OBJECTDIR}/ocall018_servo.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/ocall018_servo.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/ocall018_servo.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/ocall_018_button.o: ocall_018_button.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/ocall_018_button.o.d 
+	@${RM} ${OBJECTDIR}/ocall_018_button.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ocall_018_button.c  -o ${OBJECTDIR}/ocall_018_button.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/ocall_018_button.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/ocall_018_button.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 else
 ${OBJECTDIR}/ocall018_lab4_main_v001.o: ocall018_lab4_main_v001.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -122,6 +129,13 @@ ${OBJECTDIR}/ocall018_servo.o: ocall018_servo.c  nbproject/Makefile-${CND_CONF}.
 	@${RM} ${OBJECTDIR}/ocall018_servo.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ocall018_servo.c  -o ${OBJECTDIR}/ocall018_servo.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/ocall018_servo.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/ocall018_servo.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/ocall_018_button.o: ocall_018_button.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/ocall_018_button.o.d 
+	@${RM} ${OBJECTDIR}/ocall_018_button.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ocall_018_button.c  -o ${OBJECTDIR}/ocall_018_button.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/ocall_018_button.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/ocall_018_button.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 
