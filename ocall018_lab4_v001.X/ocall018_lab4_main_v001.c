@@ -28,14 +28,21 @@
 void setup() {
     CLKDIVbits.RCDIV = 0;
     AD1PCFG = 0x9fff; //all digital inputs and outputs
-    TRISB |= 100000000;
     _CN22PUE = 1;
+    initServo();
 }
 
 int main(void) {
     setup();
+    int pos;
+    int j;
     while(1) {
-	asm("nop");
+	for(pos = 319; pos < 1239; pos++) {
+	    setServo(pos);
+	    for(j = 0; j < 1000; j++) {
+		asm("nop");
+	    }
+	}
     }
     return 0;
 }

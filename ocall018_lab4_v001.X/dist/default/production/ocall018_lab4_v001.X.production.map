@@ -60,9 +60,9 @@ xc16-ld 1.35 (A)
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200                0xce           0x135  (309)
-.text                        0x2ce                0x7c            0xba  (186)
+.text                        0x2ce                0xb6           0x111  (273)
 
-                 Total "program" memory used (bytes):          0x1ef  (495) <1%
+                 Total "program" memory used (bytes):          0x246  (582) <1%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x2000]
@@ -91,9 +91,9 @@ External Symbols in Program Memory (by address):
                   0x000252                  __data_init_standard
                   0x0002c8                  __DefaultInterrupt
                   0x0002ce                  _initServo
-                  0x00031c                  _setServo
-                  0x000324                  _setup
-                  0x000342                  _main
+                  0x000332                  _setServo
+                  0x00033e                  _setup
+                  0x000354                  _main
 
 External Symbols in Program Memory (by name):
 
@@ -103,9 +103,9 @@ External Symbols in Program Memory (by name):
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
                   0x0002ce                  _initServo
-                  0x000342                  _main
-                  0x00031c                  _setServo
-                  0x000324                  _setup
+                  0x000354                  _main
+                  0x000332                  _setServo
+                  0x00033e                  _setup
 
 Memory Configuration
 
@@ -178,21 +178,21 @@ __CONFIG1
 .comment
  *(.comment)
 
-.debug_info       0x000000        0x8ef
+.debug_info       0x000000        0x97c
  *(.debug_info)
- .debug_info      0x000000        0x3e2 build/default/production/ocall018_lab4_main_v001.o
- .debug_info      0x0003e2        0x50d build/default/production/ocall018_servo.o
+ .debug_info      0x000000        0x3da build/default/production/ocall018_lab4_main_v001.o
+ .debug_info      0x0003da        0x5a2 build/default/production/ocall018_servo.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x1f8
+.debug_abbrev     0x000000        0x209
  *(.debug_abbrev)
- .debug_abbrev    0x000000        0x10f build/default/production/ocall018_lab4_main_v001.o
- .debug_abbrev    0x00010f         0xe9 build/default/production/ocall018_servo.o
+ .debug_abbrev    0x000000        0x120 build/default/production/ocall018_lab4_main_v001.o
+ .debug_abbrev    0x000120         0xe9 build/default/production/ocall018_servo.o
 
-.debug_line       0x000000        0x1b6
+.debug_line       0x000000        0x1c2
  *(.debug_line)
- .debug_line      0x000000         0xdd build/default/production/ocall018_lab4_main_v001.o
- .debug_line      0x0000dd         0xd9 build/default/production/ocall018_servo.o
+ .debug_line      0x000000         0xe2 build/default/production/ocall018_lab4_main_v001.o
+ .debug_line      0x0000e2         0xe0 build/default/production/ocall018_servo.o
 
 .debug_frame      0x000000         0x98
  *(.debug_frame)
@@ -836,10 +836,10 @@ __c30_signature
 .config_IESO      0x00abfc          0x2
  .config_IESO     0x00abfc          0x2 build/default/production/ocall018_lab4_main_v001.o
 
-.text             0x0002ce         0x7c
- .text            0x0002ce         0x56 build/default/production/ocall018_servo.o
+.text             0x0002ce         0xb6
+ .text            0x0002ce         0x70 build/default/production/ocall018_servo.o
                   0x0002ce                  _initServo
-                  0x00031c                  _setServo
- .text            0x000324         0x26 build/default/production/ocall018_lab4_main_v001.o
-                  0x000324                  _setup
-                  0x000342                  _main
+                  0x000332                  _setServo
+ .text            0x00033e         0x46 build/default/production/ocall018_lab4_main_v001.o
+                  0x00033e                  _setup
+                  0x000354                  _main
