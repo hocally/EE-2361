@@ -13,10 +13,7 @@ void initServo();
 void setServo(int val);
 
 void initServo() {
-    TRISB &= 011111;
-    __builtin_write_OSCCONL(OSCCON & 0xbf); // unlock PPS
-    RPOR3bits.RP6R = 18; // Use Pin RP6 for Output Compare 1 = "18" (Table 10-3)
-    __builtin_write_OSCCONL(OSCCON | 0x40); // lock PPS
+    TRISB &= 1111111111011111;
     OC1CON = 0;
     OC1R = 0;
     OC1RS = 0;

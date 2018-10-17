@@ -27,10 +27,16 @@
 #pragma config FNOSC = FRCPLL // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
 
 void setup() {
+    __builtin_write_OSCCONL(OSCCON & 0xbf); // unlock PPS
+    RPINR7bits.IC1R = 8;
+    RPOR3bits.RP6R = 18; // Use Pin RP6 for Output Compare 1 = "18" (Table 10-3)
+    __builtin_write_OSCCONL(OSCCON | 0x40); // lock PPS
     CLKDIVbits.RCDIV = 0;
     AD1PCFG = 0x9fff; //all digital inputs and outputs
     _CN22PUE = 1;
+    TRISB |= 100000000;
     initServo();
+    initPushButton();
 }
 
 int main(void) {
@@ -39,7 +45,7 @@ int main(void) {
     int j;
     while(1) {
 	for(pos = 319; pos < 1239; pos++) {
-	    setServo(pos);
+	    //setServo(pos);
 	    for(j = 0; j < 1000; j++) {
 		asm("nop");
 	    }
