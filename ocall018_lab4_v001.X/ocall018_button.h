@@ -13,7 +13,10 @@ extern "C" {
 #endif
 
 void initPushButton();
-void __attribute__((__interrupt__, __auto_psv__))_IC1Interrupt(void);
+void put(unsigned long int n);
+unsigned long int get(void);
+void __attribute__((__interrupt__, __auto_psv__)) _T2Interrupt(void);
+void __attribute__((__interrupt__, __auto_psv__)) _IC1Interrupt(void);
 
 
 #ifdef	__cplusplus

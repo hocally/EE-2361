@@ -41,15 +41,8 @@ void setup() {
 
 int main(void) {
     setup();
-    int pos;
-    int j;
-    while(1) {
-	for(pos = 319; pos < 1239; pos++) {
-	    //setServo(pos);
-	    for(j = 0; j < 1000; j++) {
-		asm("nop");
-	    }
-	}
+    while (1) {
+	setServo(94);
     }
     return 0;
 }
