@@ -39,10 +39,16 @@ void setup() {
     initPushButton();
 }
 
+unsigned long int servoVal = 0;
+
 int main(void) {
     setup();
     while (1) {
-	setServo(94);
+	long int avg = (buffer[0] + buffer[1] + buffer[2] + buffer[3]) / 4;
+	//servoVal = (avg - 2) * ((125 - 31) / (1000 - 2)) + 31;
+	//servoVal = (avg - 2) * ((125 - 31) / (1000 - 2)) + 31;
+	servoVal = 125 + (-94 * (avg - 2) / (998));
+	setServo((int) servoVal);
     }
     return 0;
 }

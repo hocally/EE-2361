@@ -12,6 +12,8 @@
 extern "C" {
 #endif
 
+extern volatile unsigned long int buffer[4];
+    
 void initPushButton();
 void put(unsigned long int n);
 unsigned long int get(void);
