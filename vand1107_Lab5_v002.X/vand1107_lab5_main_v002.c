@@ -1,8 +1,8 @@
 /*
- * File:   vand1107_lab5_main_v001.c
+ * File:   vand1107_lab5_main_v002.c
  * Author: Kevin
  *
- * Created on November 1, 2018, 11:06 AM
+ * Created on November 1, 2018, 12:31 PM
  */
 
 
@@ -28,7 +28,10 @@ void setup()
 {
     CLKDIVbits.RCDIV = 0;
     AD1PCFG = 0x9fff; //all digital inputs and outputs
-
+    I2C2BRG = 0x9D;
+    I2C2CONbits.I2CEN = 1;
+    _I2CSIDL = 0;
+    IFS3bits.MI2C2IF=0;
    
     lcd_init();
 
@@ -40,8 +43,9 @@ int main(void) {
     setup();
     while (1)
     {
-        lcd_cmd(0x0F);
+        //lcd_cmd(0x0F);
         asm("nop");
     }
     return 0;
 }
+//Got an NACK and a Stop bit
