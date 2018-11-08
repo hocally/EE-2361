@@ -60,7 +60,6 @@ unsigned long int get(void) {
 }
 volatile unsigned long int seconds = 0;
 
-
 void __attribute__((__interrupt__, __auto_psv__)) _T2Interrupt(void) {
     _T2IF = 0;
     seconds++;
@@ -68,7 +67,6 @@ void __attribute__((__interrupt__, __auto_psv__)) _T2Interrupt(void) {
 
 unsigned long int lastTime = 0;
 unsigned long int oldSeconds = 0;
-
 
 void __attribute__((__interrupt__, __auto_psv__)) _IC1Interrupt(void) {
     unsigned long int val;

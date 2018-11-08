@@ -39,12 +39,20 @@ void setup()
     
     
 }
+
+const char data2[2] = { 0b01101111,
+			0b01110010};
+
 int main(void) {
     setup();
-    while (1)
-    {
-        //lcd_cmd(0x0F);
-        asm("nop");
+    lcd_setCursor(0, 0);
+    lcd_printStr("Hello World!");
+    unsigned long i;
+    while (1) {
+	for (i = 0; i < 800000; i++) {
+	    asm("nop");
+	}
+	leftShift();
     }
     return 0;
 }

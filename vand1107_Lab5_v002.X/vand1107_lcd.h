@@ -14,7 +14,11 @@ extern "C" {
 
     void lcd_cmd(char command);
     void lcd_init();
-
+    void lcd_setCursor(char x, char y);
+    void lcd_printChar();
+    void lcd_printStr(const char *s);
+    void rightShift();
+    void leftShift();
 
 
 #ifdef	__cplusplus

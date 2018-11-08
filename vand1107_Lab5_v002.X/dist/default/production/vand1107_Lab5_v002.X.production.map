@@ -1,21 +1,21 @@
 Microchip Technology Inc, v1.35 (A)
 
 Tool Name:
-  c:\program files (x86)\microchip\xc16\v1.35\bin\bin\..\bin/elf-ld.exe
+  /opt/microchip/xc16/v1.35/bin/bin/../bin/elf-ld
 
 Command:
   -p24FJ64GA002 \
   -o \
   dist/default/production/vand1107_Lab5_v002.X.production.elf \
-  -Lc:/program files (x86)/microchip/xc16/v1.35/bin/bin/.. \
-  -Lc:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib \
-  -Lc:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../support/PIC24E/gld \
-  -Lc:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../support/PIC24F/gld \
-  -Lc:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../support/PIC24H/gld \
-  -Lc:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../support/dsPIC30F/gld \
-  -Lc:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../support/dsPIC33C/gld \
-  -Lc:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../support/dsPIC33E/gld \
-  -Lc:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../support/dsPIC33F/gld \
+  -L/opt/microchip/xc16/v1.35/bin/bin/.. \
+  -L/opt/microchip/xc16/v1.35/bin/bin/../../lib \
+  -L/opt/microchip/xc16/v1.35/bin/bin/../../support/PIC24E/gld \
+  -L/opt/microchip/xc16/v1.35/bin/bin/../../support/PIC24F/gld \
+  -L/opt/microchip/xc16/v1.35/bin/bin/../../support/PIC24H/gld \
+  -L/opt/microchip/xc16/v1.35/bin/bin/../../support/dsPIC30F/gld \
+  -L/opt/microchip/xc16/v1.35/bin/bin/../../support/dsPIC33C/gld \
+  -L/opt/microchip/xc16/v1.35/bin/bin/../../support/dsPIC33E/gld \
+  -L/opt/microchip/xc16/v1.35/bin/bin/../../support/dsPIC33F/gld \
   build/default/production/vand1107_lab5_main_v002.o \
   build/default/production/vand1107_lcd.o \
   --defsym=__MPLAB_BUILD=1 \
@@ -45,12 +45,14 @@ Command:
 Optional library libpPIC24Fxxx.a not found
 Archive member included because of file (symbol)
 
-c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+/opt/microchip/xc16/v1.35/bin/bin/../../lib/liblega-pic30-elf.a(crt0_standard.o)
                               (__resetPRI)
-c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
-                              c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o) (__data_init_standard)
-c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(crt_start_mode_normal.Leo)
+/opt/microchip/xc16/v1.35/bin/bin/../../lib/liblega-pic30-elf.a(data_init_standard.o)
+                              /opt/microchip/xc16/v1.35/bin/bin/../../lib/liblega-pic30-elf.a(crt0_standard.o) (__data_init_standard)
+/opt/microchip/xc16/v1.35/bin/bin/../../lib/liblega-pic30-elf.a(crt_start_mode_normal.Leo)
                               (__crt_start_mode_normal)
+/opt/microchip/xc16/v1.35/bin/bin/../../lib/liblega-c-elf.a(strlen.XX_eo)
+                              build/default/production/vand1107_lcd.o (_strlen)
 
 
 xc16-ld 1.35 (A)
@@ -59,10 +61,11 @@ xc16-ld 1.35 (A)
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x200                0xce           0x135  (309)
-.text                        0x2ce                0xf4           0x16e  (366)
+.text                        0x200                0xda           0x147  (327)
+.const                       0x2da                0x10            0x18  (24)
+.text                        0x2ea               0x23a           0x357  (855)
 
-                 Total "program" memory used (bytes):          0x2a3  (675) 1%
+                 Total "program" memory used (bytes):          0x4b6  (1206) 1%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x2000]
@@ -87,13 +90,20 @@ External Symbols in Program Memory (by address):
 
                   0x000200                  __resetPRI
                   0x00023c                  __psv_init
-                  0x000252                  __data_init_standard
                   0x000252                  __data_init
+                  0x000252                  __data_init_standard
                   0x0002c8                  __DefaultInterrupt
-                  0x0002ce                  _lcd_cmd
-                  0x00031e                  _lcd_init
-                  0x00039c                  _setup
-                  0x0003ba                  _main
+                  0x0002ce                  _strlen
+                  0x0002da                  _data2
+                  0x0002ea                  _lcd_cmd
+                  0x00033a                  _lcd_init
+                  0x0003b8                  _lcd_setCursor
+                  0x0003da                  _lcd_printChar
+                  0x00042a                  _lcd_printStr
+                  0x0004c4                  _rightShift
+                  0x0004ce                  _leftShift
+                  0x0004d8                  _setup
+                  0x0004f6                  _main
 
 External Symbols in Program Memory (by name):
 
@@ -102,10 +112,17 @@ External Symbols in Program Memory (by name):
                   0x000252                  __data_init_standard
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x0002ce                  _lcd_cmd
-                  0x00031e                  _lcd_init
-                  0x0003ba                  _main
-                  0x00039c                  _setup
+                  0x0002da                  _data2
+                  0x0002ea                  _lcd_cmd
+                  0x00033a                  _lcd_init
+                  0x0003da                  _lcd_printChar
+                  0x00042a                  _lcd_printStr
+                  0x0003b8                  _lcd_setCursor
+                  0x0004ce                  _leftShift
+                  0x0004f6                  _main
+                  0x0004c4                  _rightShift
+                  0x0004d8                  _setup
+                  0x0002ce                  _strlen
 
 Memory Configuration
 
@@ -126,7 +143,7 @@ LOAD build/default/production/vand1107_lab5_main_v002.o
 LOAD build/default/production/vand1107_lcd.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD pPIC24Fxxx
-LOAD c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libfx-elf.a
+LOAD /opt/microchip/xc16/v1.35/bin/bin/../../lib/libfx-elf.a
                     0xabfc                  __CONFIG2 = 0xabfc
                     0xabfe                  __CONFIG1 = 0xabfe
                     0x0001                  __NO_HANDLES = 0x1
@@ -143,15 +160,15 @@ LOAD c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libfx-elf.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000200         0xce
+.text             0x000200         0xda
  *(.init)
- .init            0x000200         0x4c c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
-                  0x000200                  __resetPRI
+ .init            0x000200         0x4c /opt/microchip/xc16/v1.35/bin/bin/../../lib/liblega-pic30-elf.a(crt0_standard.o)
                   0x000200                  __reset
+                  0x000200                  __resetPRI
                   0x00023c                  __psv_init
- .init            0x00024c         0x7c c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
-                  0x000252                  __data_init_standard
+ .init            0x00024c         0x7c /opt/microchip/xc16/v1.35/bin/bin/../../lib/liblega-pic30-elf.a(data_init_standard.o)
                   0x000252                  __data_init
+                  0x000252                  __data_init_standard
  *(.user_init)
  *(.handle)
  *(.isr*)
@@ -162,9 +179,11 @@ LOAD c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libfx-elf.a
  *(.libdsp)
  *(.lib*)
  .libpic30_crt_start_mode
-                  0x0002cc          0x2 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(crt_start_mode_normal.Leo)
-                  0x0002cc                  __crt_start_mode
+                  0x0002cc          0x2 /opt/microchip/xc16/v1.35/bin/bin/../../lib/liblega-pic30-elf.a(crt_start_mode_normal.Leo)
                   0x0002cc                  __crt_start_mode_normal
+                  0x0002cc                  __crt_start_mode
+ .libc.strlen     0x0002ce          0xc /opt/microchip/xc16/v1.35/bin/bin/../../lib/liblega-c-elf.a(strlen.XX_eo)
+                  0x0002ce                  _strlen
 
 usercode
  *(usercode)
@@ -178,26 +197,26 @@ __CONFIG1
 .comment
  *(.comment)
 
-.debug_info       0x000000        0xa33
+.debug_info       0x000000        0xb67
  *(.debug_info)
- .debug_info      0x000000        0x675 build/default/production/vand1107_lab5_main_v002.o
- .debug_info      0x000675        0x3be build/default/production/vand1107_lcd.o
+ .debug_info      0x000000        0x6a7 build/default/production/vand1107_lab5_main_v002.o
+ .debug_info      0x0006a7        0x4c0 build/default/production/vand1107_lcd.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x1aa
+.debug_abbrev     0x000000        0x208
  *(.debug_abbrev)
- .debug_abbrev    0x000000         0xda build/default/production/vand1107_lab5_main_v002.o
- .debug_abbrev    0x0000da         0xd0 build/default/production/vand1107_lcd.o
+ .debug_abbrev    0x000000        0x115 build/default/production/vand1107_lab5_main_v002.o
+ .debug_abbrev    0x000115         0xf3 build/default/production/vand1107_lcd.o
 
-.debug_line       0x000000        0x218
+.debug_line       0x000000        0x20c
  *(.debug_line)
- .debug_line      0x000000        0x104 build/default/production/vand1107_lab5_main_v002.o
- .debug_line      0x000104        0x114 build/default/production/vand1107_lcd.o
+ .debug_line      0x000000         0xe6 build/default/production/vand1107_lab5_main_v002.o
+ .debug_line      0x0000e6        0x126 build/default/production/vand1107_lcd.o
 
-.debug_frame      0x000000         0x98
+.debug_frame      0x000000        0x124
  *(.debug_frame)
  .debug_frame     0x000000         0x4c build/default/production/vand1107_lab5_main_v002.o
- .debug_frame     0x00004c         0x4c build/default/production/vand1107_lcd.o
+ .debug_frame     0x00004c         0xd8 build/default/production/vand1107_lcd.o
 
 .debug_str        0x000000         0x41
  *(.debug_str)
@@ -211,12 +230,12 @@ __CONFIG1
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000         0x50
+                  0x000000         0xac
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0x25 build/default/production/vand1107_lab5_main_v002.o
+                  0x000000         0x2f build/default/production/vand1107_lab5_main_v002.o
  .debug_pubnames
-                  0x000025         0x2b build/default/production/vand1107_lcd.o
+                  0x00002f         0x7d build/default/production/vand1107_lcd.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -804,9 +823,9 @@ __CONFIG1
                     0x0230                  UART2 = 0x230
                     0x0230                  _UART2 = 0x230
 START GROUP
-LOAD c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a
-LOAD c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\libm-elf.a
-LOAD c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-c-elf.a
+LOAD /opt/microchip/xc16/v1.35/bin/bin/../../lib/liblega-pic30-elf.a
+LOAD /opt/microchip/xc16/v1.35/bin/bin/../../lib/libm-elf.a
+LOAD /opt/microchip/xc16/v1.35/bin/bin/../../lib/liblega-c-elf.a
 END GROUP
 OUTPUT(dist/default/production/vand1107_Lab5_v002.X.production.elf elf32-pic30)
 LOAD default_isr
@@ -819,15 +838,17 @@ LOAD default_isr
                   0x0000d3         0x5f build/default/production/vand1107_lcd.o
 
 __c30_signature
-                  0x000132         0x18
+                  0x000132         0x1e
  __c30_signature
                   0x000132          0x6 build/default/production/vand1107_lab5_main_v002.o
  __c30_signature
                   0x000138          0x6 build/default/production/vand1107_lcd.o
  __c30_signature
-                  0x00013e          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
+                  0x00013e          0x6 /opt/microchip/xc16/v1.35/bin/bin/../../lib/liblega-pic30-elf.a(crt0_standard.o)
  __c30_signature
-                  0x000144          0x6 c:/program files (x86)/microchip/xc16/v1.35/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
+                  0x000144          0x6 /opt/microchip/xc16/v1.35/bin/bin/../../lib/liblega-pic30-elf.a(data_init_standard.o)
+ __c30_signature
+                  0x00014a          0x6 /opt/microchip/xc16/v1.35/bin/bin/../../lib/liblega-c-elf.a(strlen.XX_eo)
 
 .config_JTAGEN    0x00abfe          0x2
  .config_JTAGEN
@@ -836,10 +857,19 @@ __c30_signature
 .config_IESO      0x00abfc          0x2
  .config_IESO     0x00abfc          0x2 build/default/production/vand1107_lab5_main_v002.o
 
-.text             0x0002ce         0xf4
- .text            0x0002ce         0xce build/default/production/vand1107_lcd.o
-                  0x0002ce                  _lcd_cmd
-                  0x00031e                  _lcd_init
- .text            0x00039c         0x26 build/default/production/vand1107_lab5_main_v002.o
-                  0x00039c                  _setup
-                  0x0003ba                  _main
+.const              0x82da         0x10 load address 0x0002da  
+ .const             0x82da         0x10 build/default/production/vand1107_lab5_main_v002.o
+                    0x82da                  _data2
+
+.text             0x0002ea        0x23a
+ .text            0x0002ea        0x1ee build/default/production/vand1107_lcd.o
+                  0x0002ea                  _lcd_cmd
+                  0x00033a                  _lcd_init
+                  0x0003b8                  _lcd_setCursor
+                  0x0003da                  _lcd_printChar
+                  0x00042a                  _lcd_printStr
+                  0x0004c4                  _rightShift
+                  0x0004ce                  _leftShift
+ .text            0x0004d8         0x4c build/default/production/vand1107_lab5_main_v002.o
+                  0x0004d8                  _setup
+                  0x0004f6                  _main
