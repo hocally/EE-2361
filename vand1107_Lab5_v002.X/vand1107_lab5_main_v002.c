@@ -45,8 +45,8 @@ const char data2[2] = { 0b01101111,
 
 int main(void) {
     setup();
-    int side = 0;
-    int i = 0;
+    //int side = 0;
+    //int i = 0;
     lcd_setCursor(0, 0);
     lcd_printStr("Hello World!");
     unsigned long i;
