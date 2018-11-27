@@ -11,12 +11,12 @@
 #define BUF_SIZE 1024
 
 long buffer[BUF_SIZE];
-long index = 0;
+long myIndex = 0;
 
 void putVal(int newValue) { // add a new value to the buffer
-    buffer[index++] = newValue;
-    if(index >= BUF_SIZE) {
-        index = 0;
+    buffer[myIndex++] = newValue;
+    if(myIndex >= BUF_SIZE) {
+        myIndex = 0;
     }
 }    
 int getAvg() {
