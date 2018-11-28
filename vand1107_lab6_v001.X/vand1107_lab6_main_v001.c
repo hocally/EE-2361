@@ -48,11 +48,11 @@ void setup() {
     AD1CON1bits.FORM = 0b00;
     AD1CON2 = 0;
     AD1CON2bits.CSCNA = 0; // turn off scan
-    AD1CON2bits.SMPI = 0b1111; // interrupt after every 16th conversion
+    AD1CON2bits.SMPI = 0b0; // interrupt after every 16th conversion
     AD1CON2bits.BUFM = 0;  // two 8-word buffers
-    AD1CON3bits.ADCS = 1;
+    AD1CON3bits.ADCS = 0b1;
     AD1CON3bits.ADRC = 0;
-    AD1CON3bits.SAMC = 1;
+    AD1CON3bits.SAMC = 0b1;
     AD1CON1bits.ADON = 1; // turn on module
     AD1CHS = 0;
     AD1CHSbits.CH0NB = 0;
@@ -60,11 +60,11 @@ void setup() {
     AD1CHSbits.CH0NA = 0;
     AD1CHSbits.CH0SA = 0;
     
-    
     T3CON = 0;
     TMR3 = 0;
     T3CONbits.TCKPS = 0b10;
-    PR3 = 15625;
+    PR3 = 1562;
+    //15625
     T3CONbits.TON = 1;
 
     T2CON = 0;
@@ -82,29 +82,19 @@ void setup() {
     IEC0bits.T2IE = 1; // enable interrupt on T2 completion
     IFS0bits.T2IF = 0;
 }
+unsigned long* pointer = 0x300;
+unsigned int sample = 0;
 
 void __attribute__((__interrupt__, __auto_psv__)) _ADC1Interrupt(void) {
     IFS0bits.AD1IF = 0;
-    putVal(ADC1BUF0);
-    putVal(ADC1BUF1);
-    putVal(ADC1BUF2);
-    putVal(ADC1BUF3);
-    putVal(ADC1BUF4);
-    putVal(ADC1BUF5);
-    putVal(ADC1BUF6);
-    putVal(ADC1BUF7);
-    putVal(ADC1BUF8);
-    putVal(ADC1BUF9);
-    putVal(ADC1BUFA);
-    putVal(ADC1BUFB);
-    putVal(ADC1BUFC);
-    putVal(ADC1BUFD);
-    putVal(ADC1BUFE);
-    putVal(ADC1BUFF);
+    putVal(pointer[sample]);
+    sample += 2;
+    sample &= 0x21;
 }
 
 void __attribute__((__interrupt__, __auto_psv__)) _T2Interrupt(void) {
     _T2IF = 0;
+    TMR2 = 0;
     displayFlag = 1;
 }
 
@@ -117,8 +107,7 @@ int main(void) {
 	    displayFlag = 0;
 	    lcd_setCursor(0, 0);
 	    data = getAvg();
-	    data = (3.3/1024) * data;
-	    sprintf(dataStr, "%6.4f V", (3.3/1024)*data);
+	    sprintf(dataStr, "%6.4f V", (3.3*data) / 1023);
 	    lcd_printStr(dataStr);
 	}
     }

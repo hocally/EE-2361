@@ -9,7 +9,7 @@
 #include "vand1107_lcd.h"
 
 #define BUF_SIZE 1024
-
+unsigned long avg = 0;
 long buffer[BUF_SIZE];
 long myIndex = 0;
 
@@ -25,7 +25,8 @@ int getAvg() {
     for(i = 0; i < BUF_SIZE; i++) {
         sum += buffer[i];
     }
-    return sum / BUF_SIZE;
+    avg = sum / BUF_SIZE;
+    return avg;
 } // average all buffer vals
 void initBuffer() {
     long i;
